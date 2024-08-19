@@ -14,6 +14,21 @@ struct TreeNode* CreatATreeNode(int key){
     node->left = NULL;
     node->right = NULL;
 }
+//when the array is in sorted order
+struct TreeNode* BSTinsert(int low , int high, int nodes[]){
+    if(low > high)return NULL; // if low and high cross each other no data to insert so return null
+    if(low == high){ // leaf node
+        return CreatAnode(nodes[low]);
+    }
+    //find the mid and this mid is your root
+    int mid = (low + high)/2; // 
+    struct TreeNode *root = CreatAnode(nodes[mid]);
+    root->left = BSTinsert(low, mid-1,nodes);
+    root->right = BSTinsert(mid+1,high,nodes);
+    return root;
+}
+
+//when the array is not in sorted order
 struct TreeNode* insert(struct TreeNode *root, int key){
     if(root == NULL){
         return CreatATreeNode(key);
