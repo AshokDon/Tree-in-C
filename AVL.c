@@ -15,7 +15,9 @@ int height(Node *N) {
         return 0;
     return N->height;
 }
-
+int max(int a , int b){
+    return (a > b) ? a : b;
+}
 // Function to create a new node
 Node* newNode(int key) {
     Node* node = (Node*)malloc(sizeof(Node));
@@ -133,8 +135,7 @@ int main() {
     root = insert(root, 50);
     root = insert(root, 25);
 
-    // Printing in-order traversal of the AVL tree
-    printf("In-order traversal of the AVL tree is:\n");
+   
     inOrder(root);
 
     return 0;
