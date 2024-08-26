@@ -29,20 +29,20 @@ Node* newNode(int key) {
 }
 
 // Right rotate the subtree rooted with y
-Node *rightRotate(Node *y) {
-    Node *x = y->left;
-    Node *T2 = x->right;
+Node *rightRotate(Node *x) {
+    Node *y = x->left;
+    Node *T1 = y->right;
 
     // Perform rotation
-    x->right = y;
-    y->left = T2;
+    y->right = x;
+    x->left = T1;
 
     // Update heights
     y->height = max(height(y->left), height(y->right)) + 1;
     x->height = max(height(x->left), height(x->right)) + 1;
 
     // Return new root
-    return x;
+    return y;
 }
 
 // Left rotate the subtree rooted with x
