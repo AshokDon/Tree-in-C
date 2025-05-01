@@ -49,10 +49,11 @@ void Inorder(struct BinaryTree *root){
     Inorder(root->right);
 }
 struct BinaryTree *FindMin(struct BinaryTree *root){
-    if(root->left == NULL){
-        return root;
+    if(root == NULL){
+        return NULL;
     }
-    return FindMin(root->left);
+    if(root->left != NULL) return FindMin(root->left);
+    return root;
 }
 struct BinaryTree* Delete(struct BinaryTree *root, int val){
     if(root == NULL){
