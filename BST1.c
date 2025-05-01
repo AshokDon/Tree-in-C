@@ -48,6 +48,50 @@ void Inorder(struct BinaryTree *root){
     printf("%d ",root->data);
     Inorder(root->right);
 }
+struct BinaryTree *FindMin(struct BinaryTree *root){
+    if(root->left == NULL){
+        return root;
+    }
+    return FindMin(root->left);
+}
+struct BinaryTree* Delete(struct BinaryTree *root, int val){
+    if(root == NULL){
+        return NULL;
+    }
+    if(val < root->data){
+        root->left = Delete(root->left, val);
+    }
+    else if(val > root->data){
+        root->right = Delete(root->right,val);
+    }
+    else{
+        //3 conditions 
+        //1) no childrens 
+        if(root->left == NULL && root->right==NULL){
+            free(root);
+            return NULL;
+        }
+        //one child
+        else if(root->left == NULL or root->right == NULL){
+            struct BinaryTree *temp;
+            if(root->right == NULL){
+                temp = root->left;
+            }
+            else{
+                temp = root->right;
+            }
+            free(root);
+            return temp;
+        }
+        //has 2 childs 
+        else{
+            struct BinaryTree *temp = FindMin(root->right);
+            root->val = temp->val;
+            root->right = Delete(root->right,temp->val);
+            
+        }
+    }
+}
 int main() {
 	//BST -> BT
 	//Online 
@@ -61,12 +105,21 @@ int main() {
 	   
 	    
 	    scanf("%d",&val);
-	    //printf("%d ",val);
 	    Insert(val,root);
 	    
 	}
 	//printf("%d ",root->data);
 	Inorder(root);
+	scanf("%d",&val);
+	Delete(root,val);
 
 }
+
+
+
+
+
+
+
+
 
